@@ -4,16 +4,35 @@ Essa aplicação tem como intuito gerenciar as vulnerabilidades do top 10 OWASP,
 # Ferramentas utilizadas
 Web aplication desenvolvida com Python utilizando Django como back-end, Bootstrap utilizado no front-end da aplicação, banco de dados utilizado é em sqlite3 e a SGDB escolhida foi o Django Administration.
 
-# Explicando o Projeto
-## Let's Start
+# Let's Start
+## Criação do projeto
 Primeiro vamos precisar instalar as ferramentas utilizadas no projetos, através do comando "pip" do Python vamos instalar o Django e baixar a pasta static que contem o nosso Bootstrap para ser utilizado no estilo da nossa página.
 
 Após instalar essas ferramentas será necessário criar um projeto para nossa web aplication, crie uma pasta para armazenar seu projeto e rode o comando: 
+
     "django-admin.py startproject *NOME_DO_PROJETO*"
     
-## Configuração do projeto
-    
 Em seguida vamos criar o nosso aplicativo, que é o responsavel pelas configurações do back-end e banco de dados, basta entrar na pasta do projeto que foi criada com o primeiro comando e rodar o seguinte comando, "python manage.py startapp *NOME_DO_APP*"
+    
+## Configuração do projeto
+Seguindo para a configuração do nosso projeto, devemos ir dentro da pasta do projeto (a que criamos com o primeiro comando) e abrir o arquivo "urls.py", com esse arquivo podemos manipular as URLs que estaram no nosso site. Dentro do array urlpatterns adicione outro path da nossa página principal, insira: 
+
+    path('',include('*NOME_DO_APP*.urls'))
+    
+Com esse comando estamos redirecionando nossas URLs par as URLs que se encontram no nosso app.
+
+Dentro da pasta do projeto vamos abrir o arquivo "settings.py" e adicionar dentro do array INSTALLED_APPS o nome do nosso aplicativo, aquele que foi criado através do comando startapp.
+
+Agora podemos começar a criar nossas páginas web, para poder navegar entre diversas páginas dentro do web site, vamos precisar criar o path delas dentro da pasta do aplicativo nos arquivos urls.py e views.py. 
+Começando pelas URLs, é necessario adicionar inicialmente esses código dentro do arquivo:
+
+    from django.urls import path # gerenciador dos caminhos das páginas
+    from . import views # chamando os arquivos que devem ser renderizados dentro das páginas
+    
+    urlpatterns = []
+
+
+
 
 Explicar o projeto, se precisar relembrar algo ve o curso desse cara dnv: https://www.youtube.com/watch?v=A1nqCgAM6CE
 relembrar UPDATE e DELETE: https://www.youtube.com/watch?v=EX6Tt-ZW0so&t=1259s
