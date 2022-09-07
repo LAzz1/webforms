@@ -90,12 +90,12 @@ Essa página é a página de visualização dos items registrados no nosso banco
 
 Observando a coluda de edit e delete, temos dois icones, um lápis que nos leva para página de edição dos objetos do nosso banco de dados e o icone de "X", que nos leva para página de excluir objetos.
 
-##Update Page
+## Update Page
 Nessa página é passado o ID do objeto do banco de dados pela URL para podermos editar o objeto que realizamos o clique dentro da tabela de visualização. Dentro da página é exibido o mesmo formulário da página de registro, porem ele vem preenchido com as informações do objeto selecionado para a edição poder ser realizada mais facilmente, além dessa mudança temos a do titulo e a do texto do botão, realizadas através de um trigger quando a URL da página contem "update".
 
 Esse formulário funciona exatamente da mesma forque que o de registro, com os campos todos preenchidos corretamente, validações feitas sem apresentar erros e concordando com o alerta de prevenção de erros, o objeto selecionado tem seus parametros editados.
 
-#Delete Page
+## Delete Page
 A ultima função do nosso CRUD pode ser realizada dentro dessa página, nela vamos poder deletar os objetos selecionados na tabela do banco de dados.
 
 É utilizada a mesma lógica dos IDs dos objetos passados pela URL para sabermos qual objeto deve ser deletado, nessa página é feita uma confirmação para o usuario evitar excluir o objeto errado, é exibido na tela o código, titulo e ano da vulnerabilidade que sera deletada. No caso de todas informações estarem corretas basta clicar no botão escrito "Confirm" para deletar o objeto do banco de dados.
