@@ -1,20 +1,20 @@
-# Introdução
-Essa aplicação tem como intuito gerenciar as vulnerabilidades do top 10 OWASP, permitindo que o usuario realize as funções de um CRUD (criar, ler, editar e deletar). Para adicionar ao banco de dados basta enviar um formulário na página de registro, que caso passe por todas validações é adicionado um novo item no nosso banco de dados, para lear os items do banco de dados devemos ir para página de visualização, na qual é exibida uma tabela com todos os items do nosso banco de dados, dentro dessa tabela já temos um link para as outras duas opções do CRUD, editar e deletar. 
-
-Clicando no icone de lápis vamos ser redirecionado para um formulário de edição do item clicado, já clicando no icone de "X", vamos ser redirecionados para uma página para confirmação do usuario se ele realmente quer deletar aquele item que ele selecionou.
-
 # Ferramentas utilizadas
-Web aplication desenvolvida com Python utilizando Django como back-end, Bootstrap utilizado no front-end da aplicação, banco de dados utilizado é em sqlite3 e a SGDB escolhida foi o Django Administration.
+Web aplication desenvolvida com Python utilizando Django como back-end, Bootstrap e CSS inline utilizado no front-end da aplicação, o banco de dados utilizado foi o sqlite3 e a SGDB escolhida foi o Django Administration.
+
+# Introdução
+Essa aplicação web tem como intuito gerenciar as vulnerabilidades do top 10 OWASP, permitindo que o usuario realize as funções de um CRUD (criar, ler, editar e deletar). Para adicionar uma nova vulnerabilidade, basta enviar um formulário na página de registro, que caso passe por todas validações, será adicionado um novo objeto no banco de dados, para visualizar as vulnerabilidades registradas, devemos ir para página de visualização, na qual é exibida uma tabela com todos os items do nosso banco de dados, dentro dessa tabela já temos um link para as outras duas opções do CRUD, editar e deletar. 
+
+Clicando no icone de lápis vamos ser redirecionado para um formulário de edição do objeto selecionado na tabela. Entretando se clicarmos no icone de "X", vamos ser redirecionados para a página de exclusão da vulnerabilidade selecionada.
 
 # Let's Start
 ## Criação do projeto
-Primeiro vamos precisar instalar as ferramentas utilizadas no projetos, através do comando "pip" do Python vamos instalar o Django e baixar a pasta static que contem o nosso Bootstrap para ser utilizado no estilo da nossa página.
+Primeiramente vamos precisar instalar as ferramentas utilizadas no projetos, será necessario instalar o Python e uma IDE de sua preferencia (recomendo VSCode ou Sublime), após instalar o python será necessário baixar e instalar o Django através do comando "pip" do Python. Para a utilização do Bootstrap deve-se baixar a pasta static que contem o nosso Bootstrap para ser utilizado no estilo da nossa página.
 
-Após instalar essas ferramentas será necessário criar um projeto para nossa web aplication, crie uma pasta para armazenar seu projeto e rode o comando: 
+Após a instalação das ferramentas será necessário criar um projeto para nossa web aplication, crie uma diretório para armazenar seu projeto e rode dentro dela o comando: 
 
     django-admin.py startproject *NOME_DO_PROJETO*
     
-Em seguida vamos criar o nosso aplicativo, que é o responsavel pelas configurações do back-end e banco de dados, basta entrar na pasta do projeto que foi criada com o primeiro comando e rodar o seguinte comando: 
+Em seguida vamos criar o nosso aplicativo, que é o responsavel pelas configurações do back-end e banco de dados, basta continuar no diretório criado para armazenar todo o projeto e rodar o seguinte comando:
 
     python manage.py startapp *NOME_DO_APP*
     
@@ -25,9 +25,9 @@ Seguindo para a configuração do nosso projeto, devemos ir dentro da pasta do p
     
 Com esse comando estamos redirecionando nossas URLs par as URLs que se encontram no nosso app.
 
-Dentro da pasta do projeto vamos abrir o arquivo "settings.py" e adicionar dentro do array INSTALLED_APPS o nome do nosso aplicativo, aquele que foi criado através do comando startapp.
+Dentro da pasta do projeto vamos abrir o arquivo "settings.py" e adicionar dentro do array INSTALLED_APPS o nome do nosso aplicativo, o mesmo que foi criado através do comando startapp.
 
-Agora podemos começar a criar nossas páginas web, para poder navegar entre diversas páginas dentro do web site, vamos precisar criar o path delas dentro da pasta do aplicativo nos arquivos urls.py e views.py. Mas antes de prosseguirmos com a linkagem do path com os arquivos devemos criar uma pasta templates e dentro dela colocar todos arquivos.html que futuramente vão ser nosssas páginas web. Então após criar a pasta templates crie dentro dela o arquivo "home.html".
+Agora podemos começar a criar nossas páginas web, vamos precisar criar o path delas dentro da pasta do aplicativo nos arquivos urls.py e views.py, mas antes de prosseguirmos com a linkagem do path com as views, devemos criar uma pasta templates dentro do diretório do nosso aplicativo e dentro dela colocar todos arquivos.html que futuramente vão ser nosssas páginas web. Então após criar a pasta templates crie dentro dela o arquivo "home.html".
 
 Começando pelas URLs, é necessario adicionar inicialmente esses código dentro do arquivo:
 
@@ -36,7 +36,7 @@ Começando pelas URLs, é necessario adicionar inicialmente esses código dentro
     
     urlpatterns = []
 
-agora dentro do array "urlpatterns" podemos adicionar o path do arquivo, chamar dentro do arquivo views as nossas "def" que renderizam nossos html e dar um nome unico para esse path, ficaria da seguite maneira uma home page:
+agora dentro do array "urlpatterns" podemos adicionar o path da nossa página, chamar a def que furturamente será criada dentro do arquivo "views.py" e por ultimo dar um nome unico para esse path. Ficaria da seguite maneira uma home page:
 
     urlpatterns = [
         path('', views.home, name="home")
@@ -49,11 +49,11 @@ Com nosso path criado, devemos criar a "def" dentro do arquivo views.py que vai 
     def home(request):
         return render(request, 'home.html',{})
 
-Podemos agora rodar nossa aplicação! Rode no console dentro do diretório que contem o projeto e o app o comando:
+Podemos agora iniciar nossa aplicação! Dentro do console insira esse comando:
     
     python manage.py runserver
 
-vai ser exibido no console o link da sua aplicação, que deve vir no padrão de ip, algo como "http://127.0.0.1:8000/". Seguindo essa lógica de criação dos path com a renderização das páginas podemos criar quantas páginas forem necessaria para nossa aplicação! Um ultimo exemplo de uma página adicional:
+vai ser exibido no console o link da sua aplicação, que deve vir como um ip, "http://127.0.0.1:8000/". Seguindo essa lógica de criação dos path com a renderização das páginas podemos criar quantas páginas forem necessaria para nossa aplicação! Um ultimo exemplo de uma página adicional:
 
 Dentro do urls.py:
 
@@ -72,7 +72,7 @@ Dentro da views.py:
     def content(request):
         return render(request, 'content.html',{})
  
- com essas definições é possivel acessar a home page no link exemplo "http://127.0.0.1:8000/" e a página de conteudos no link http://127.0.0.1:8000/conteudo
+ com essas definições é possivel acessar a home page no link exemplo "http://127.0.0.1:8000/" e a página de conteudos no link "http://127.0.0.1:8000/conteudo".
 
 # Estrutura do projeto
 ## Home Page
