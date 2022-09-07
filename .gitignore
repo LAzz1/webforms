@@ -1,9 +1,9 @@
 settings.py
 *.pdf
-/__pycache__
+__pycache__
 __init__.py
-/migrations
-/static
+migrations
+static
 apps.py
 tests.py
 asgi.py
