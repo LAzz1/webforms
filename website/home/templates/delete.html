@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}" />
+<html>
+
+<head>
+
+    <div class="buttons mt-3 px-3" style="display: flex;">
+        <button type="button" class="btn btn-outline-secondary"
+            onclick="window.location.href='http\://127.0.0.1:8000/view/'">Back to table</button>
+    </div>
+    <title>Delete Page</title>
+</head>
+
+<body>
+    <div>
+        <h1 style="display: flex; flex-direction: column; align-items: center;" class="display-4">DELETING ITEM</h1>
+        <h2 class="lead" style="font-size: 30px; display: flex; flex-direction: column; align-items: center;">Are you sure you want to delete this vulnerability?
+        </h2>
+    </div>
+    <div style="padding-top: 10px">
+        <div class="successMsg" style="display: flex; flex-direction: column; align-items: center;">
+            <form method="POST" class="border rounded" style="padding: 10px 25px 10px 25px;box-shadow: 2px 2px 2px 2px rgba(90, 90, 90, 0.28)">
+                {% csrf_token %}
+                <p class="text-muted pt-3" style="font-size: 25px;">{{forms.code}} - {{forms.title}}: {{forms.year}}</p>
+                <button type="submit" class="btn btn-secondary btn-block confirm-button">Confirm</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

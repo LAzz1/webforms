@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/home/css/bootstrap.css' %}" />
+<html>
+
+<head>
+    <title>Home page</title>
+</head>
+
+<body>
+    <h1 style="display: flex; flex-direction: column; align-items: center; padding-top: 7%;" class="display-3">HOME PAGE</h1>
+    <div class="buttons" style="display: flex; flex-direction: column;  align-items: center;">
+        <div class="first-button">
+            <button type="button" style="padding: 0.3rem 3rem 0.3rem; font-size: 25px;"
+                class="btn btn-outline-secondary my-2 " onclick="window.location.href='register/'">Add
+                vulnerability</button>
+        </div>
+        <div class="second-button">
+            <button type="submit" style="padding: 0.3rem 4.7rem 0.3rem; font-size: 25px;"
+                class="btn btn-outline-secondary my-1" onclick="window.location.href='view/'">Top OWASP</button>
+        </div>
+    </div>
+</body>
+
+</html>

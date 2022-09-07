@@ -1,0 +1,226 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}" />
+<html>
+
+<head>
+    <div class="buttons mt-3 px-3" id="back btn" style="display: flex;">
+        <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/'">Back to home</button>
+    </div>
+    <title>Register Page</title>
+</head>
+
+<body>
+    <h1 style="display: flex; flex-direction: column; align-items: center; font-size: 55px;" id="pageTitle" class="display-4">NEW VULNERABILITY</h1>
+
+    <form class="container d-flex justify-content-center" method="POST">
+        {% csrf_token %}
+        <div class="card" style="box-shadow: 3px 3px 3px 3px rgba(90, 90, 90, 0.28)">
+            <div class="card-body">
+                <p class="blockquote" style="font-size: 17px;">Please provide following informations about the vulnerability</p>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Code" name="code"
+                                value="{{ forms.code }}">
+                            <small id="codeHelp" style="color:red" class="form-text text-muted">
+                                Code must be in this format: A99
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Year" name="year"
+                                    value="{{ forms.year }}">
+                            </div>
+                            <small id="yearHelp" style="color:red" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Title" name="title"
+                                    value="{{ forms.title }}">
+                            </div>
+                            <small id="titleHelp" style="color:red" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label for="description"></label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Description"
+                                    name="description">{{ forms.description }}</textarea>
+                            </div>
+                            <div style="display: flex;" class="inputDescription">
+                                <small id="descHelp" style="color:red" class="form-text text-muted">
+                                    Enter between 1-2000 characters
+                                </small>
+                                <small id="char_count" style="font-size: 12px; padding: 5px 0 0 220px;">0/2000</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" onclick="inputWordValidation()"
+                    class="btn btn-secondary btn-block confirm-button">Confirm</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.location.pathname.includes('update')) {
+                document.querySelector('[id="back btn"]').firstElementChild.remove()
+                document.querySelector('[id="back btn"]').append(document.createElement('button'))
+                document.querySelector('[id="back btn"]').querySelector('button').classList.add('btn')
+                document.querySelector('[id="back btn"]').querySelector('button').classList.add('btn-outline-secondary')
+                document.querySelector('[id="back btn"]').querySelector('button').textContent = 'Back to table'
+                document.querySelector('[id="back btn"]').querySelector('button').onclick = () => { window.location.href = 'http\://127.0.0.1:8000/view/' }
+                document.querySelector('#pageTitle').textContent='UPDATING VULNERABILITY'
+                document.querySelector('#pageTitle').style.fontSize='45px'
+            }
+        })
+    </script>
+    <script>
+        let textArea = document.getElementById("description");
+        let characterCounter = document.getElementById("char_count");
+        const maxNumOfChars = 2000;
+        const charCount = () => {
+            let numOfEnteredChars = textArea.value.length;
+            let counter = numOfEnteredChars;
+            if (Number(counter) <= 0) {
+                characterCounter.textContent = counter + "/2000";
+                characterCounter.style.color = "red";
+            } else if (Number(counter) > 2000) {
+                characterCounter.textContent = counter + "/2000";
+                characterCounter.style.color = "red";
+            } else {
+                characterCounter.textContent = counter + "/2000";
+                characterCounter.style.color = 'green';
+            }
+        }
+        textArea.addEventListener("input", charCount);
+    </script>
+    <script>
+        function preventSubmitError(event) {
+            function descFormatation() {
+                var arrDesc = document.querySelector('[name="description"]').value.split('')
+                var descValidated = ''
+
+                if (arrDesc.length > 20) {
+                    for (let i = 0; i < 20; i++) {
+                        descValidated += arrDesc[i]
+                    }
+                    return descValidated + '...'
+                }
+                else {
+                    return document.querySelector('[name="description"]').value
+                }
+            }
+
+            var alertMsg = `Are you sure you want to submit this form?\n
+            Code: ${document.querySelector('[name="code"]').value}
+            Year: ${document.querySelector('[name="year"]').value}
+            Title: ${document.querySelector('[name="title"]').value}
+            Description: ${descFormatation()}`
+
+            if (!confirm(alertMsg)) {
+                event.preventDefault();
+                return alert('Your form was not submited');
+            }
+        }
+    </script>
+    <script>
+        function inputWordValidation(inputText) {
+            document.querySelector('[name="code"]').value = String(document.querySelector('[name="code"]').value.trim())
+            document.querySelector('[name="year"]').value = String(document.querySelector('[name="year"]').value.trim())
+            document.querySelector('[name="title"]').value = String(document.querySelector('[name="title"]').value.trim())
+            document.querySelector('[name="description"]').value = String(document.querySelector('[name="description"]').value.trim())
+
+            var codeValidation = document.querySelector('[name="code"]').value.match(/\b(A[0-9]{2}|a[0-9]{2})\b/g)
+            var yearValidation = document.querySelector('[name="year"]').value.match(/^[1-9]\d{3}$/g)
+            var titleValidation = () => {
+                var title = document.querySelector('[name="title"]').value.split(' ')
+                var wordValidation = true
+                if (title.length >= 1) {
+                    title.forEach((data) => {
+                        if (data.split('').length < 2) {
+                            wordValidation = false
+                        }
+                    })
+                    return wordValidation
+                }
+                else {
+                    return false
+                }
+            }
+            var descValidation = () => {
+                var wordCount = document.querySelector('[name="description"]').value.split('').length
+                if (wordCount <= 0 || wordCount > 2000) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            }
+
+            if (codeValidation == null || yearValidation == null || titleValidation() == false || descValidation() == false) {
+                // CODE INPUT VALIDATION
+                if (codeValidation == null) {
+                    document.querySelector('[id="codeHelp"]').textContent = "Insert a valid code. Format: A99"
+                    document.querySelector('[id="codeHelp"]').classList.remove('text-muted')
+                    event.preventDefault();
+                }
+                else {
+                    document.querySelector('[id="codeHelp"]').textContent = "Code must be in this format: A99"
+                    document.querySelector('[id="codeHelp"]').classList.add('text-muted')
+                }
+
+                //  YEAR INPUT VALIDATION
+                if (yearValidation == null) {
+                    document.querySelector('[id="yearHelp"]').textContent = "Insert a valid year. Must include only four numbers."
+                    document.querySelector('[id="yearHelp"]').classList.remove('text-muted')
+                    event.preventDefault();
+                }
+                else {
+                    document.querySelector('[id="yearHelp"]').textContent = ""
+                    document.querySelector('[id="yearHelp"]').classList.add('text-muted')
+                }
+
+                //  TITLE INPUT VALIDATION
+                if (titleValidation() == false) {
+                    document.querySelector('[id="titleHelp"]').textContent = "Title must have more than two letters per word"
+                    document.querySelector('[id="titleHelp"]').classList.remove('text-muted')
+                    event.preventDefault();
+                }
+                else {
+                    document.querySelector('[id="titleHelp"]').textContent = ""
+                    document.querySelector('[id="titleHelp"]').classList.add('text-muted')
+                }
+                //  DESCRIPTION INPUT VALIDATION
+                if (descValidation() == false) {
+                    document.querySelector('[id="descHelp"]').textContent = 'Enter between 1-2000 characters'
+                    document.querySelector('[id="descHelp"]').classList.remove('text-muted')
+                    event.preventDefault();
+                }
+                else {
+                    document.querySelector('[id="descHelp"]').textContent = "Enter between 1-2000 characters"
+                    document.querySelector('[id="descHelp"]').classList.add('text-muted')
+                }
+            }
+            else {
+                document.querySelector('[name="code"]').value = document.querySelector('[name="code"]').value.toUpperCase()
+                preventSubmitError(event)
+            }
+
+        }
+    </script>
+</body>
+
+
+</html>
