@@ -1,7 +1,7 @@
 from django.db import models
 
 class owasp(models.Model):
-    code = models.CharField(max_length=10)
+    code = models.CharField(max_length=3)
     year = models.CharField(max_length=4)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=2000)
