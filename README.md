@@ -20,7 +20,7 @@ Agora criar o aplicativo que é o responsável pelas configurações do back-end
 
     python manage.py startapp *NOME_DO_APP*
 
-# Configuração do projeto
+## Configuração do projeto
 Abrir o arquivo "urls.py" que está na pasta do projeto (esse arquivo manipula as URLs), dentro do array urlpatterns adicione o seguinte path da página principal para criar o redirecionamento para as URLs que se encontram no app.
 
     path('',include('*NOME_DO_APP*.urls'))
