@@ -20,7 +20,7 @@ def thankyoupage(request):
     return render(request,'thankyou.html')
 
 def view(request):
-    vulnerabilities = owasp.objects.all().order_by('year','code')
+    vulnerabilities = owasp.objects.all().order_by('code','-year')
     return render(request,'view.html',{'dataBase':vulnerabilities})
 
 def update(request, pk):

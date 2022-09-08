@@ -1,0 +1,10 @@
+1. não consegui manipular o CSS do Bootstrap, tentei fazer algumas modificações pra alinhas melhor o template do site, porem não foi possivel.
+Pelo o que entendi as modificações no Bootstrap são feitas alterando o nome da class dos seus elementos.
+
+2. na visualização da tabela, não consegui mudar o icone quando o mouse está em cima dele, queria mudar o icone atual para o icone preenchido
+
+3. icones de editar e remover estão com a cor bugada quando passa o mouse em cima, quando é passado o mouse em cima de qualquer objeto dentro da tabela a cor muda para um cinza mais claro
+isso se aplica aos icones tambem, porem quando você passa o mouse em cima do icone e ele muda a cor, ele não fica mais cinza claro, sei onde está esse erro mas não sei arrumar.
+
+4. não consegui implementar animações para os icones. Pelo o que entendi seria necessario usar um template disponibilizado pelo site de animação dos icones do Bootstrap, não conseguiria
+utilizar minha página.

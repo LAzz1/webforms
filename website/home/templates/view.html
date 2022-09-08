@@ -3,14 +3,18 @@
 <html>
 
 <head>
+  {% load bootstrap_icons %}
   <title>view page</title>
   <div class="buttons mt-3 px-3" style="display: flex;">
     <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/'">Back to home</button>
   </div>
+  <div style="display: flex; justify-content: flex-end; margin-right: 90px;">
+    <i style="color: inherit; cursor: pointer;" onclick="window.print()">{% bs_icon 'printer' size='2rem' %}</i>
+  </div>
 </head>
 
 <body>
-  {% load bootstrap_icons %}
+  
   <h1 style="display: flex; flex-direction: column; align-items: center;" class="pb-2 display-4">Top 10 OWASP</h1>
   <table class="table table-striped border-top-0 border-dark rounded"
     style="border-collapse: collapse; width: 80%;margin-left: auto; margin-right: auto; box-shadow: 0px 20px 30px 5px rgba(41, 41, 41, 0.28);">
@@ -31,8 +35,12 @@
         <th>{{ item.year }}</th>
         <th>{{ item.title }}</th>
         <th>{{ item.description }}</th>
-        <th style="cursor:pointer; padding: 10px 0 0 20px;"><a style="color: inherit;" onMouseOver="this.style.color='#4780fc'" onMouseOut="this.style.color='#212529'" href="{% url 'update' item.id%}">{% bs_icon 'pencil' size='1.5em' %}</a></th>
-        <th style="cursor:pointer; padding: 10px 0 0 25px;"><a style="color: inherit;" onMouseOver="this.style.color='#fa0202'" onMouseOut="this.style.color='#212529'" href="{% url 'delete' item.id%}">{% bs_icon 'x-octagon' size='1.5em' %}</a></th>
+        <th style="cursor:pointer; padding: 10px 0 0 20px;"><a style="color: inherit;"
+            onMouseOver="this.style.color='#4780fc'" onMouseOut="this.style.color='#212529'"
+            href="{% url 'update' item.id %}">{% bs_icon 'pencil' size='1.5em' %}</a></th>
+        <th style="cursor:pointer; padding: 10px 0 0 25px;"><a style="color: inherit;"
+            onMouseOver="this.style.color='#fa0202'" onMouseOut="this.style.color='#212529'"
+            href="{% url 'delete' item.id %}">{% bs_icon 'x-octagon' size='1.5em' %}</a></th>
       </tr>
       {% endfor %}
     </tbody>
